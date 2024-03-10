@@ -92,7 +92,12 @@ export default function Story() {
   }, []);
 
   // Function to append popular categories to starred categories until the total count reaches 10
-
+function mountSwiper() {
+  const swiper = new Swiper(".swiper-container", {
+    // Other Swiper options
+    wrapperClass: "swiper-wrapper", // Make sure to define the wrapperClass property
+  });
+}
   const toggleStar1 = () => {
     // Toggle the star icon's color
     const newStarred = !isCategoryStarred;
@@ -1014,7 +1019,7 @@ export default function Story() {
                     coverflowEffect={{
                       rotate: 0,
                       stretch: 0,
-                      depth: 200,
+                      depth: 400,
                       modifier: 1,
                       slideShadows: false,
                     }}
