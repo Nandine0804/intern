@@ -1,0 +1,41 @@
+Nav {
+    position: relative;
+}
+
+Nav span {
+    position: relative;
+    display: block;
+    cursor: pointer;
+}
+
+Nav span:before,
+Nav span:after {
+    position: absolute;
+    opacity: 0.5;
+    height: 100%;
+    width: 0px;
+    content: " ";
+    background: rgba(255, 255, 255, 0.589);
+    transition: all 0.3s ease-in-out;
+}
+
+Nav span:before {
+    left: 0;
+    top: 0;
+}
+
+Nav span:after {
+    right: 0;
+    bottom: 0;
+}
+
+Nav span:hover:before,
+Nav span:hover:after {
+    opacity: 1;
+    height: 2px;
+    width: calc(100% - 3px);
+}
+
+Nav span:hover {
+    color: whitesmoke;
+}
