@@ -4,9 +4,8 @@ import { BiChevronDown } from "react-icons/bi";
 import { BsPen, BsArrowLeft } from "react-icons/bs";
 import Popular from "./Popular";
 import { CgArrowsExchangeAltV } from "react-icons/cg";
-import AnchorLink from "react-anchor-link-smooth-scroll";
 import SwiperCore, { EffectCoverflow } from "swiper";
-import { AiOutlineStar, AiFillStar, AiOutlineShare } from "react-icons/ai";
+import { AiFillStar } from "react-icons/ai";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { CiShare1 } from "react-icons/ci";
 import "swiper/swiper-bundle.min.css";
@@ -42,8 +41,6 @@ let initialCategories = [
 ];
 
 export default function Story() {
-  const [swiper, setSwiper] = useState(null);
-
   const [subject, setSubject] = useState("");
   const [describe, setDescribe] = useState("");
   const [searchText, setSearchText] = useState("");
@@ -90,24 +87,12 @@ export default function Story() {
     }
 
     // Fetch popular categories from your data source
-    // For example:
     // const fetchedPopularCategories = fetchPopularCategories();
     // setPopularCategories(fetchedPopularCategories);
   }, []);
 
   // Function to append popular categories to starred categories until the total count reaches 10
-  const getFavoriteCategories = () => {
-    const favoriteCategories = [...starredCategories];
 
-    let remainingCount = 10 - starredCategories.length;
-    const popularCategoriesToAdd = popularCategories
-      .filter((category) => !starredCategories.includes(category))
-      .slice(0, remainingCount);
-
-    favoriteCategories.push(...popularCategoriesToAdd);
-
-    return favoriteCategories;
-  };
   const toggleStar1 = () => {
     // Toggle the star icon's color
     const newStarred = !isCategoryStarred;
@@ -181,6 +166,8 @@ export default function Story() {
   };
 
   useEffect(() => {
+    // It generates a random index and sets 'check' to the value at that index in 'randomCat'.
+
     if (randomCat.length > 0) {
       const random = Math.floor(Math.random() * categories.length);
       setCheck(randomCat[random]);
@@ -188,6 +175,7 @@ export default function Story() {
   }, [randomCat]);
 
   function getCurrentDateTime() {
+    // This function gets the current date and time in a specific format.
     const now = new Date();
     const day = String(now.getDate()).padStart(2, "0");
     const month = String(now.getMonth() + 1).padStart(2, "0");
@@ -219,6 +207,7 @@ export default function Story() {
   }
 
   function handleSearch2(e) {
+    // Setting search state, toggling boolean, and performing search for 'search2'
     setSearch(e.target.value);
     setMenu(false);
     setShow3(true);
@@ -228,6 +217,8 @@ export default function Story() {
   }
 
   function handleCategorySelect(category) {
+    // Updating selected category, search text, and search results
+    // Toggling visibility of a component
     setSelectedCategory(category.toUpperCase());
     setSearchText("");
     setSearchResults([]);
@@ -235,6 +226,7 @@ export default function Story() {
   }
 
   function handleCategorySelect2(category) {
+    // Resetting states, setting search, and performing search for 'search2'
     setSelectedValue("");
     setSearch(category);
     setSearchResults2([]);
@@ -242,6 +234,7 @@ export default function Story() {
   }
 
   function performSearch(searchValue) {
+    // Filtering categories and returning results
     const filteredCategories =
       categories &&
       categories.filter((category) =>
@@ -252,6 +245,7 @@ export default function Story() {
   }
 
   function performSearch2(searchValue) {
+    // Filtering 'randomCat' and returning results
     const filteredCategories =
       randomCat &&
       randomCat.filter((category) =>
@@ -262,6 +256,7 @@ export default function Story() {
   }
 
   function clear() {
+    // Resetting states to empty values
     setSubject("");
     setDescribe("");
     setSearchText("");
@@ -269,6 +264,10 @@ export default function Story() {
   }
 
   function handleSubmit(e) {
+    // Generating random ID and creating data object
+    // Pushing data to database
+    // Checking and adding new category to list if necessary
+    // Alerting user
     const random = Math.random() * 4;
     e.preventDefault();
     const Data = {
@@ -365,15 +364,18 @@ export default function Story() {
   }, [windowWidth]);
 
   function handleflip() {
+    // Toggling flipped state
     setFlipped((prev) => !prev);
   }
 
   function handleChildValue(value) {
+    // Updating selected value and clearing search
     setSelectedValue(value);
     setSearch("");
   }
-
+  // Function to format time string
   function formattedDate(dateTimeString) {
+    // Extracting date components
     const dateTimeParts = dateTimeString.split("-");
 
     const day = dateTimeParts[0];
@@ -404,6 +406,7 @@ export default function Story() {
   }
 
   useEffect(() => {
+    // Conditional logic to handle responsive behavior based on window width
     if (windowWidth > 425) {
       setReveal({});
     } else if (windowWidth <= 425) {
@@ -413,6 +416,7 @@ export default function Story() {
   }, [windowWidth]);
 
   function togglePara(itemId) {
+    //Function to toggle paragraph visibility based on window width
     windowWidth > 425
       ? setExpandedSections((prevExpandedSections) => ({
           ...prevExpandedSections,
@@ -423,6 +427,7 @@ export default function Story() {
           [itemId]: !prevReveal[itemId],
         }));
   }
+// Style object for main reveal section
 
   const revealMain = {
     position: "absolute",
@@ -640,41 +645,40 @@ export default function Story() {
   }, []);
 
   const topRowName = isCategoryStarred ? "Favorite Topic" : "Popular Topic";
-const [favoriteCategories, setFavoriteCategories] = useState([]);
-   useEffect(() => {
-     // Fetch starred categories from local storage
-     const storedStarredCategories = localStorage.getItem("starredCategories");
-     if (storedStarredCategories) {
-       const parsedStarredCategories = JSON.parse(storedStarredCategories);
-       setStarredCategories(parsedStarredCategories);
-     }
+  const [favoriteCategories, setFavoriteCategories] = useState([]);
+  useEffect(() => {
+    // Fetch starred categories from local storage
+    const storedStarredCategories = localStorage.getItem("starredCategories");
+    if (storedStarredCategories) {
+      const parsedStarredCategories = JSON.parse(storedStarredCategories);
+      setStarredCategories(parsedStarredCategories);
+    }
 
-     // Fetch popular categories from your data source
-     // For example:
-     // const fetchedPopularCategories = fetchPopularCategories();
-     // setPopularCategories(fetchedPopularCategories);
-   }, []);
+    // Fetch popular categories from your data source
+    // For example:
+    // const fetchedPopularCategories = fetchPopularCategories();
+    // setPopularCategories(fetchedPopularCategories);
+  }, []);
 
-   useEffect(() => {
-     // Append popular categories to starred categories until total count reaches 10
-     const getFavoriteCategories = () => {
-       const favoriteCategories = [...starredCategories];
+  useEffect(() => {
+    // Append popular categories to starred categories until total count reaches 10
+    const getFavoriteCategories = () => {
+      const favoriteCategories = [...starredCategories];
 
-       let remainingCount = 10 - starredCategories.length;
-       const popularCategoriesToAdd = popularCategories
-         .filter((category) => !starredCategories.includes(category))
-         .slice(0, remainingCount);
+      let remainingCount = 10 - starredCategories.length;
+      const popularCategoriesToAdd = popularCategories
+        .filter((category) => !starredCategories.includes(category))
+        .slice(0, remainingCount);
 
-       favoriteCategories.push(...popularCategoriesToAdd);
+      favoriteCategories.push(...popularCategoriesToAdd);
 
-       return favoriteCategories;
-     };
+      return favoriteCategories;
+    };
 
-     // Update favorite categories state
-     setFavoriteCategories(getFavoriteCategories());
-   }, [starredCategories, popularCategories]);
-  
-  
+    // Update favorite categories state
+    setFavoriteCategories(getFavoriteCategories());
+  }, [starredCategories, popularCategories]);
+
   const [categoryContent, setCategoryContent] = useState({});
 
   useEffect(() => {
@@ -827,7 +831,7 @@ const [favoriteCategories, setFavoriteCategories] = useState([]);
           </button>
         </form>
 
-        <section className="section-2">
+        <section className="section-2" id="popular">
           <div className="section-2-head">
             <div ref={dropdownRef}>
               <h1>

@@ -1,31 +1,39 @@
-import React from 'react'
+import React from "react";
 
+// Define a functional component named ListItem
+function ListItem({ value, onChildValue }) {
+  // Define a function handleClick, which invokes onChildValue with the value of the ListItem
+  const handleClick = () => {
+    onChildValue(value); // Hey, this is the part where we trigger the parent's function and pass in our value
+  };
+
+  // Render a list item with an onClick event that calls handleClick when clicked
+  return <li onClick={handleClick}>{value}</li>; // This is where we show our value in a list item
+}
+
+// Define the Popular component
 export default function Popular({ onChildValue }) {
-
-  function ListItem({ value }) {
-
-    const handleClick = () => {
-      onChildValue(value)
-    }
-    
-    return <li onClick={handleClick}>{value}</li>
-  }
-
+  // Render the Popular component
   return (
     <div className="popular">
-      <h1>What’s popular right now?</h1>
-
+      <h1>What’s popular right now?</h1>{" "}
+      {/* title for our popular items list */}
       <div className="list">
         <ul className="list-items">
-          <ListItem value="ENGINEERING DAYS" />
-          <ListItem value="BANGALORE STORIES" />
-          <ListItem value="GOA DIARIES" />
-          <ListItem value="NITK STUFFS" />
-          <ListItem value="IIM THINGS" />
-          <ListItem value="IIMB FACTS" />
-          <ListItem value="SHAYARI" />
-          <ListItem value="VIKAS MEENA" />
-          <ListItem value="BEACH" />
+          {/* Render ListItem components with different values */}
+          <ListItem value="ENGINEERING DAYS" onChildValue={onChildValue} />{" "}
+          {/* Showing our first popular item */}
+          <ListItem
+            value="BANGALORE STORIES"
+            onChildValue={onChildValue}
+          />{" "}
+          <ListItem value="GOA DIARIES" onChildValue={onChildValue} />{" "}
+          <ListItem value="NITK STUFFS" onChildValue={onChildValue} />{" "}
+          <ListItem value="IIM THINGS" onChildValue={onChildValue} />{" "}
+          <ListItem value="IIMB FACTS" onChildValue={onChildValue} />{" "}
+          <ListItem value="SHAYARI" onChildValue={onChildValue} />{" "}
+          <ListItem value="VIKAS MEENA" onChildValue={onChildValue} />{" "}
+          <ListItem value="BEACH" onChildValue={onChildValue} />{" "}
         </ul>
       </div>
     </div>

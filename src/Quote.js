@@ -1,3 +1,14 @@
+//To attract and make it even more informational or important to end users to see how journel is important
+
+
+
+
+
+
+
+
+
+
 import React, { useState, useEffect } from "react";
 import "./quote.css"
 const JournalQuotes = () => {
