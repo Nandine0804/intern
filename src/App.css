@@ -675,7 +675,7 @@ textarea {
         font-size: 2.5rem;
     }
     .show-para>p {
-        width: 580px;
+        width: 50%;
         font-size: 1.125rem;
         line-height: 25px;
     }
